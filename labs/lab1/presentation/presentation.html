@@ -1,0 +1,181 @@
+<h1 id="вводная-часть">Вводная часть</h1>
+<h2 id="цель">Цель</h2>
+<p>Целью данной работы является приобретение практических навыков
+установки операционной системы на виртуальную машину, настройки ми-
+нимально необходимых для дальнейшей работы сервисов.</p>
+<h2 id="задание">Задание</h2>
+<ol type="1">
+<li>Установка и настройка операционной системы.</li>
+<li>Найти следующую информацию:
+<ol type="1">
+<li>Версия ядра Linux (Linux version).</li>
+<li>Частота процессора (Detected Mhz processor).</li>
+<li>Модель процессора (CPU0).</li>
+<li>Объем доступной оперативной памяти (Memory available).</li>
+<li>Тип обнаруженного гипервизора (Hypervisor detected).</li>
+<li>Тип файловой системы корневого раздела.</li>
+</ol></li>
+</ol>
+<h1 id="элементы-презентации">Элементы презентации</h1>
+<h2 id="актуальность">Актуальность</h2>
+<ul>
+<li>Даёт понять, о чём пойдёт речь</li>
+<li>Следует широко и кратко описать проблему</li>
+<li>Мотивировать свое исследование</li>
+<li>Сформулировать цели и задачи</li>
+<li>Возможна формулировка ожидаемых результатов</li>
+</ul>
+<h2 id="выполнение-лабораторной-работы">Выполнение лабораторной
+работы</h2>
+<p>Запускаю терминал. Перехожу в каталог /var/tmp. Провожу установку и
+конфигурацию операционной системы. Запускаю виртуальную машину. (рис.
+1).</p>
+<figure id="fig:001">
+<img src="image/1.jpg" style="width:70.0%"
+alt="Окно создания виртуальной машины" />
+<figcaption aria-hidden="true">Окно создания виртуальной
+машины</figcaption>
+</figure>
+<p>Проверяю в свойствах VirtualBox месторасположение каталога для
+виртуальных машин. (рис. 2).</p>
+<figure id="fig:002">
+<img src="image/2.jpg" style="width:70.0%" alt="Окно выбора имени" />
+<figcaption aria-hidden="true">Окно выбора имени</figcaption>
+</figure>
+<p>Указываю имя виртуальной машины (мой логин в дисплейном классе), а
+также тип операционной системы — Linux (рис. 3).</p>
+<figure id="fig:003">
+<img src="image/3.jpg" style="width:70.0%"
+alt="Окно выбора основных характеристик для гостевой ОС" />
+<figcaption aria-hidden="true">Окно выбора основных характеристик для
+гостевой ОС</figcaption>
+</figure>
+<p>Выставляю основной памяти размер 2048 Мб, выбираю 1 процессор (рис.
+4).</p>
+<figure id="fig:004">
+<img src="image/4.jpg" style="width:70.0%"
+alt="Окно выбора основных характеристик для гостевой ОС" />
+<figcaption aria-hidden="true">Окно выбора основных характеристик для
+гостевой ОС</figcaption>
+</figure>
+<p>Выделаю 40 Гб памяти на виртуальном жестком диске (рис. 5).</p>
+<figure id="fig:005">
+<img src="image/5.jpg" style="width:70.0%"
+alt="Окно выбора объема памяти" />
+<figcaption aria-hidden="true">Окно выбора объема памяти</figcaption>
+</figure>
+<p>Выбираю в VirtualBox «Свойства», затем «Носители» виртуальной машины.
+Добавляю новый привод оптических дисков. (рис. 6).</p>
+<figure id="fig:006">
+<img src="image/6.jpg" style="width:70.0%"
+alt="Выбор оптического диска Rocky" />
+<figcaption aria-hidden="true">Выбор оптического диска
+Rocky</figcaption>
+</figure>
+<p>Запускаю виртуальную машину (рис. 7).</p>
+<figure id="fig:007">
+<img src="image/7.jpg" style="width:70.0%" alt="Запуск" />
+<figcaption aria-hidden="true">Запуск</figcaption>
+</figure>
+<p>Выбираю язык установки (рис. 8).</p>
+<figure id="fig:008">
+<img src="image/8.jpg" style="width:70.0%"
+alt="Выбор языка установки" />
+<figcaption aria-hidden="true">Выбор языка установки</figcaption>
+</figure>
+<p>В обзоре установки будем проверять все настройки и менять на нужные
+(рис. 9).</p>
+<figure id="fig:009">
+<img src="image/9.jpg" style="width:70.0%" alt="Окно настроек" />
+<figcaption aria-hidden="true">Окно настроек</figcaption>
+</figure>
+<p>Язык раскладки должен быть русский (рис. 10).</p>
+<figure id="fig:010">
+<img src="image/10.jpg" style="width:70.0%" alt="Выбор раскладки" />
+<figcaption aria-hidden="true">Выбор раскладки</figcaption>
+</figure>
+<p>Часовой пояс поменяла на московское время. Установила пароль для
+администратора. Для пользователя так же сделала пароль и сделала этого
+пользователя администратором .</p>
+<p>В соответствии с требованием лабораторной работы выбираю окружение
+сервер с GUB и средства разработки в дополнительном программном
+обеспечении (рис. 11).</p>
+<figure id="fig:011">
+<img src="image/11.jpg" style="width:70.0%" alt="Выбор окружения" />
+<figcaption aria-hidden="true">Выбор окружения</figcaption>
+</figure>
+<p>Отключаю kdump (рис. 12).</p>
+<figure id="fig:012">
+<img src="image/12.jpg" style="width:70.0%" alt="Отключение kdump" />
+<figcaption aria-hidden="true">Отключение kdump</figcaption>
+</figure>
+<p>Проверяю сеть, указываю имя узла в соответствии с соглашением об
+именовании (рис. 13).</p>
+<figure id="fig:013">
+<img src="image/13.jpg" style="width:70.0%" alt="Выбор сети" />
+<figcaption aria-hidden="true">Выбор сети</figcaption>
+</figure>
+<p>Начало установки (рис. 14).</p>
+<figure id="fig:014">
+<img src="image/15.jpg" style="width:70.0%" alt="Установка" />
+<figcaption aria-hidden="true">Установка</figcaption>
+</figure>
+<p>После заврешения установки образ диска сам пропадет из носителей.
+После установки при запуске операционной системы появляется окно выбора
+пользователя.</p>
+<h2 id="выполнение-дополнительного-задания">Выполнение дополнительного
+задания</h2>
+<p>Открываю терминал, в нем прописываю dmesg | less (рис. 15).</p>
+<figure id="fig:015">
+<img src="image/17.jpg" style="width:70.0%" alt="Окно терминала" />
+<figcaption aria-hidden="true">Окно терминала</figcaption>
+</figure>
+<p>Версия ядра 5.14.0-284.11.1.el9_2.x86_64 (рис. 16).</p>
+<figure id="fig:016">
+<img src="image/18.jpg" style="width:70.0%" alt="Версия ядра" />
+<figcaption aria-hidden="true">Версия ядра</figcaption>
+</figure>
+<p>Частота процессора 1704 МГц (рис. 17).</p>
+<figure id="fig:017">
+<img src="image/19.jpg" style="width:70.0%" alt="Частота процессора" />
+<figcaption aria-hidden="true">Частота процессора</figcaption>
+</figure>
+<p>Модель процессора Intel Core i5-8400T (рис. 18).</p>
+<figure id="fig:018">
+<img src="image/20.jpg" style="width:70.0%" alt="Модель процессора" />
+<figcaption aria-hidden="true">Модель процессора</figcaption>
+</figure>
+<p>Доступно 213688 Кб из 2096696 Кб (рис. 19).</p>
+<figure id="fig:019">
+<img src="image/21.jpg" style="width:70.0%"
+alt="Объем доступной оперативной памяти" />
+<figcaption aria-hidden="true">Объем доступной оперативной
+памяти</figcaption>
+</figure>
+<p>Обнаруженный гипервизор типа KVM (рис. 20).</p>
+<figure id="fig:020">
+<img src="image/22.jpg" style="width:70.0%"
+alt="Тип обнаруженного гипервизора" />
+<figcaption aria-hidden="true">Тип обнаруженного
+гипервизора</figcaption>
+</figure>
+<p>sudo fdish -l показывает тип файловой системы, типа Linux, Linux LVM
+(рис. 21).</p>
+<figure id="fig:021">
+<img src="image/23.jpg" style="width:70.0%"
+alt="Тип файловой системы" />
+<figcaption aria-hidden="true">Тип файловой системы</figcaption>
+</figure>
+<p>Далее показана последовательно монтирования файловых систем (рис.
+22).</p>
+<figure id="fig:022">
+<img src="image/24.jpg" style="width:70.0%"
+alt="Последовательность монтирования файловых систем" />
+<figcaption aria-hidden="true">Последовательность монтирования файловых
+систем</figcaption>
+</figure>
+<h2 id="вывод">Вывод</h2>
+<p>Я приобрела практические навыки установки операционной системы на
+виртуальную машину, настройки ми- нимально необходимых для дальнейшей
+работы сервисов.</p>
+<p>:::</p>
