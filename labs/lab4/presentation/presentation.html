@@ -1,0 +1,142 @@
+<h1 id="цель-работы">Цель работы</h1>
+<p>Получение практических навыков работы в консоли с расширенными
+атрибутами файлов</p>
+<h1 id="выполнение-лабораторной-работы">Выполнение лабораторной
+работы</h1>
+<ol type="1">
+<li>От имени пользователя guest, созданного в прошлых лабораторных
+работах, определяю расширенные атрибуты файлa
+<code>/home/guest/dir1/file1</code> (рис. 1).</li>
+</ol>
+<figure id="fig:001">
+<img src="image/1.jpg" style="width:70.0%"
+alt="Определение атрибутов" />
+<figcaption aria-hidden="true">Определение атрибутов</figcaption>
+</figure>
+<ol start="2" type="1">
+<li>Изменяю права доступа для файла home/guest/dir1/file1 с помощью
+chmod 600 (рис. 2).</li>
+</ol>
+<figure id="fig:002">
+<img src="image/2.jpg" style="width:70.0%"
+alt="Изменение прав доступа" />
+<figcaption aria-hidden="true">Изменение прав доступа</figcaption>
+</figure>
+<ol start="3" type="1">
+<li>Пробую установить на файл /home/guest/dir1/file1 расширен- ный
+атрибут a от имени пользователя guest, в ответ получаю отказ от
+выполнения операции (рис. 3).</li>
+</ol>
+<figure id="fig:003">
+<img src="image/3.jpg" style="width:70.0%"
+alt="Попытка установки рассширенных атрибутов" />
+<figcaption aria-hidden="true">Попытка установки рассширенных
+атрибутов</figcaption>
+</figure>
+<ol start="4" type="1">
+<li>Устанавливаю расширенные права уже от имени суперпользователя,
+теперь нет отказа от выполнения операции (рис. 4).</li>
+</ol>
+<figure id="fig:004">
+<img src="image/4.jpg" style="width:70.0%"
+alt="Установка расширенных атрибутов" />
+<figcaption aria-hidden="true">Установка расширенных
+атрибутов</figcaption>
+</figure>
+<ol start="5" type="1">
+<li>От пользователя guest проверяю правильность установки атрибута (рис.
+5).</li>
+</ol>
+<figure id="fig:005">
+<img src="image/5.jpg" style="width:70.0%" alt="Проверка атрибутов" />
+<figcaption aria-hidden="true">Проверка атрибутов</figcaption>
+</figure>
+<ol start="6" type="1">
+<li>Выполняю <strong>дозапись</strong> в файл с помощью
+<code>echo 'test' &gt;&gt; dir1/file1</code>, далее выполняю чтение
+файла, убеждаюсь, что дозапись была выполнена (рис. 6).</li>
+</ol>
+<figure id="fig:006">
+<img src="image/6.jpg" style="width:70.0%" alt="Дозапись в файл" />
+<figcaption aria-hidden="true">Дозапись в файл</figcaption>
+</figure>
+<ol start="7" type="1">
+<li>Пробую удалить файл, получаю отказ от выполнения действия. (рис.
+7).</li>
+</ol>
+<figure id="fig:007">
+<img src="image/7.jpg" style="width:70.0%" alt="Попытка удалить файл" />
+<figcaption aria-hidden="true">Попытка удалить файл</figcaption>
+</figure>
+<p>То же самое получаю при попытке переименовать файл(рис. 8).</p>
+<figure id="fig:008">
+<img src="image/8.jpg" style="width:70.0%"
+alt="Попытка переименовать файл" />
+<figcaption aria-hidden="true">Попытка переименовать файл</figcaption>
+</figure>
+<ol start="8" type="1">
+<li>Получаю отказ от выполнения при попытке установить другие права
+доступа (рис. 9).</li>
+</ol>
+<figure id="fig:009">
+<img src="image/9.jpg" style="width:70.0%"
+alt="Попытка изменить права доступа" />
+<figcaption aria-hidden="true">Попытка изменить права
+доступа</figcaption>
+</figure>
+<ol start="9" type="1">
+<li>Снимаю расширенные атрибуты с файла (рис. 10).</li>
+</ol>
+<figure id="fig:010">
+<img src="image/10.jpg" style="width:70.0%"
+alt="Снятие расширенных атрибутов" />
+<figcaption aria-hidden="true">Снятие расширенных атрибутов</figcaption>
+</figure>
+<p>Проверяю ранее не удавшиеся действия: чтение, переименование,
+изменение прав доступа. Теперь все из этого выполняется (рис. 11).</p>
+<figure id="fig:011">
+<img src="image/11.jpg" style="width:70.0%"
+alt="Проверка выполнения действий" />
+<figcaption aria-hidden="true">Проверка выполнения действий</figcaption>
+</figure>
+<ol start="10" type="1">
+<li>Пытаюсь добавить расширенный атрибут i от имени пользователя guest,
+как и раньше, получаю отказ (рис. 12).</li>
+</ol>
+<figure id="fig:012">
+<img src="image/12.jpg" style="width:70.0%"
+alt="Попытка добавить расширенный атрибут" />
+<figcaption aria-hidden="true">Попытка добавить расширенный
+атрибут</figcaption>
+</figure>
+<p>Добавляю расширенный атрибут i от имени суперпользователя, теперь все
+выполнено верно (рис. 13).</p>
+<figure id="fig:013">
+<img src="image/13.jpg" style="width:70.0%"
+alt="Добавление расширенного атрибута" />
+<figcaption aria-hidden="true">Добавление расширенного
+атрибута</figcaption>
+</figure>
+<p>Пытаюсь записать в файл, дозаписать, переименовать или удалить,
+ничего из этого сделать нельзя (рис. 14).</p>
+<figure id="fig:014">
+<img src="image/14.jpg" style="width:70.0%"
+alt="Проверка выполнения действий" />
+<figcaption aria-hidden="true">Проверка выполнения действий</figcaption>
+</figure>
+<h1 id="выводы">Выводы</h1>
+<p>В результате выполнения работы вы повысили свои навыки использования
+интерфейса командой строки (CLI), познакомились на примерах с тем, как
+используются основные и расширенные атрибуты при разграничении доступа.
+Имели возможность связать теорию дискреционного разделения доступа
+(дискреционная политика безопасности) с её реализацией на практике в ОС
+Linux. Опробовали действие на практике расширенных атрибутов «а» и
+«i»</p>
+<h1 id="список-литературы.-библиография">Список литературы.
+Библиография</h1>
+<p>[0] Методические материалы курса</p>
+<p>[1] Права доступа:
+https://codechick.io/tutorials/unix-linux/unix-linux-permissions</p>
+<p>[2] Расширенные атрибуты: https://ru.manpages.org/xattr/7</p>
+<p>[3] Операции с расширенными атрибутами:
+https://p-n-z-8-8.livejournal.com/64493.html</p>
