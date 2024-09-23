@@ -1,0 +1,124 @@
+<h1 id="цель-работы">Цель работы</h1>
+<p>Научиться тестированию веб-приложений с помощью сканера nikto</p>
+<h1 id="задание">Задание</h1>
+<p>Использование nikto.</p>
+<h1 id="выполнение-лабораторной-работы">Выполнение лабораторной
+работы</h1>
+<h2 id="выполнение-основных-действий">Выполнение основных действий</h2>
+<p>Чтобы работать с nikto, необходимо подготовить веб-приложение,
+которое будем сканировать. Это будет DVWA. Для этого запустила apache2
+(рис. <span class="citation"
+data-cites="fig:001">[-@fig:001]</span>).</p>
+<figure id="fig:001">
+<img src="image/1.png" style="width:70.0%" alt="Запуск apache2" />
+<figcaption aria-hidden="true">Запуск apache2</figcaption>
+</figure>
+<p>Ввожу в адресной строке браузера адрес DVWA, перехожу в режим выбора
+уровня безопасности, ставлю минимальный (необязательно, nikto при
+обычном сканировании для режима impossible и low выдаст одинаковые
+потенциальные уязвимости, что логично, ведь они остаются, но изменяется
+сложность, с которой их можно использовать) (рис. <span class="citation"
+data-cites="fig:002">[-@fig:002]</span>).</p>
+<figure id="fig:002">
+<img src="image/2.PNG" style="width:70.0%" alt="Запуск DVWA" />
+<figcaption aria-hidden="true">Запуск DVWA</figcaption>
+</figure>
+<p>Запускаю nikto (рис. <span class="citation"
+data-cites="fig:003">[-@fig:003]</span>).</p>
+<figure id="fig:003">
+<img src="image/3.png" style="width:70.0%" alt="Запуск nikto" />
+<figcaption aria-hidden="true">Запуск nikto</figcaption>
+</figure>
+<p>Проверить веб-приложение можно, введя его полный URL и не вводя порт,
+попробовала просканировать так (рис. <span class="citation"
+data-cites="fig:004">[-@fig:004]</span>).</p>
+<figure id="fig:004">
+<img src="image/4.png" style="width:70.0%" alt="Название рисунка" />
+<figcaption aria-hidden="true">Название рисунка</figcaption>
+</figure>
+<p>Затем попробовала просканировать введя адрес хоста и адрес порта,
+результаты незначительно отличаются (рис. <span class="citation"
+data-cites="fig:005">[-@fig:005]</span>).</p>
+<figure id="fig:005">
+<img src="image/5.png" style="width:70.0%" alt="Название рисунка" />
+<figcaption aria-hidden="true">Название рисунка</figcaption>
+</figure>
+<h2 id="анализ-результатов-сканирования">Анализ результатов
+сканирования</h2>
+<p>Кроме адреса хоста и порта веб-приложения, никто выводит инофрмацию о
+различных уязвимостях приложения:</p>
+<p>Сервер: Apache/2.4.58 (Debian) + /DVWA/: Заголовок X-Frame-Options,
+защищающий от перехвата кликов, отсутствует. Смотрите:
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</p>
+<ul>
+<li><p>/DVWA/: Заголовок X-Content-Type-Options не задан. Это может
+позволить пользовательскому агенту отображать содержимое сайта способом,
+отличным от MIME-типа. Смотрите:
+https://www.netsparker.com/web-vulnerability-scanner/vulnerabilities/missing-content-type-header/</p></li>
+<li><p>Корневая страница /DVWA перенаправляет на: login.php</p></li>
+<li><p>Каталоги CGI не найдены (используйте ‘-C all’, чтобы
+принудительно проверить все возможные каталоги)</p></li>
+<li><p>ОПЦИИ: Разрешенные HTTP-методы: GET, POST, OPTIONS, HEAD
+.</p></li>
+<li><p>/DVWA///etc/hosts: Установка сервера позволяет считывать любой
+системный файл, добавляя дополнительный “/” к URL-адресу.</p></li>
+<li><p>/DVWA/config/: Найдена индексация каталога.</p></li>
+<li><p>/DVWA/config/: Информация о конфигурации может быть доступна
+удаленно.</p></li>
+<li><p>/DVWA/tests/: Найдена индексация каталога.</p></li>
+<li><p>/DVWA/tests/: Это может быть интересно.</p></li>
+<li><p>/DVWA/database/: Найдена индексация каталога.</p></li>
+<li><p>/DVWA/база данных/: Найден каталог базы данных.</p></li>
+<li><p>/DVWA/документы/: Найдена индексация каталога.</p></li>
+<li><p>/DVWA/login.php: Найдена страница входа
+администратора/раздел.</p></li>
+<li><p>/DVWA/.git/index: Индексный файл Git может содержать информацию о
+списке каталогов.</p></li>
+<li><p>/DVWA/.git/HEAD: Найден файл Git HEAD. Может содержаться полная
+информация о репозитории.</p></li>
+<li><p>/DVWA/.git/config: Найден конфигурационный файл Git. Может
+содержаться информация о деталях репозитория.</p></li>
+<li><p>/DVWA/.gitignore: найден файл .gitignore. Можно разобраться в
+структуре каталогов.</p></li>
+<li><p>/DVWA/wp-content/themes/twentyeleven/images/headers/server.php?filesrc=/etc/hosts:
+Обнаружен файловый менеджер с бэкдором на PHP.</p></li>
+<li><p>/DVWA/wordpress/wp-content/themes/twentyeleven/images/headers/server.php?filesrc=/etc/hosts:
+Обнаружен файловый менеджер с бэкдором на PHP.</p></li>
+<li><p>/DVWA/wp-includes/Requests/Utility/content-post.php?filesrc=/etc/hosts:
+Найден файловый менеджер с бэкдором на PHP.</p></li>
+<li><p>/DVWA/wordpress/wp-includes/Requests/Utility/content-post.php?filesrc=/etc/hosts:
+Найден файловый менеджер с бэкдором на PHP.</p></li>
+<li><p>/DVWA/wp-включает в
+себя/js/tinymce/themes/modern/Meuhy.php?filesrc=/etc/hosts: Найден
+файловый менеджер бэкдора PHP.</p></li>
+<li><p>/DVWA/wordpress/wp-включает в
+себя/js/tinymce/themes/modern/Meuhy.php?filesrc=/etc/hosts: Найден
+файловый менеджер бэкдора на PHP.</p></li>
+<li><p>/DVWA/assets/mobirise/css/meta.php?filesrc=: Найден файловый
+менеджер бэкдора на PHP.</p></li>
+<li><p>/DVWA/login.cgi?cli=aa%20aa%27cat%20/etc/hosts: Удаленное
+выполнение какой-либо команды маршрутизатором D-Link.</p></li>
+<li><p>/DVWA/shell?cat+/etc/hosts: Обнаружен черный ход.</p></li>
+<li><p>/DVWA/.dockerignore: найден файл .dockerignore. Возможно, удастся
+разобраться в структуре каталогов и узнать больше о сайте.</p></li>
+</ul>
+<p>Бэкдор, тайный вход (от англ. back door — «чёрный ход», «лазейка»,
+буквально «задняя дверь») — дефект алгоритма, который намеренно
+встраивается в него разработчиком и позволяет получить
+несанкционированный доступ к данным или удалённому управлению
+операционной системой и компьютером в целом.</p>
+<p>Также в результатах nikto отображает код OSVDB 561 и дает ссылку на
+CVE-2003-1418. OSVDB — это аббревиатура базы данных уязвимостей с
+открытым исходным кодом.</p>
+<p>CVE-2003-1418 — это уязвимость в Apache HTTP Server 1.3.22–1.3.27 на
+OpenBSD, которая позволяет удалённым злоумышленникам получать
+конфиденциальную информацию через:</p>
+<ul>
+<li><p>Заголовок ETag, который раскрывает номер вode.</p></li>
+<li><p>Многочастную границу MIME, которая раскрывает идентификаторы
+дочерних процессов (PID).</p></li>
+</ul>
+<p>В настоящее время эта проблема имеет среднюю степень тяжести.</p>
+<h1 id="выводы">Выводы</h1>
+<p>Научилась использовать сканер nikto для тестирования
+веб-приложений</p>
