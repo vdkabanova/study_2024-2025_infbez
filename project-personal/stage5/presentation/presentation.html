@@ -1,0 +1,199 @@
+<h1 id="цель-работы">Цель работы</h1>
+<p>Научиться использовать Burp Suite.</p>
+<h1 id="теоретическое-введение">Теоретическое введение</h1>
+<p>Burp Suite представляет собой набор мощных инструментов безопасности
+веб-приложений, которые демонстрируют реальные возможности
+злоумышленника, проникающего в веб-приложения. Эти инструменты позволяют
+сканировать, анализировать и использовать веб-приложения с помощью
+ручных и автоматических методов. Интеграция интерфейсов этих
+инструментов обеспечивает полную платформу атаки для обмена информацией
+между одним или несколькими инструментами, что делает Burp Suite очень
+эффективной и простой в использовании платформой для атаки
+веб-приложений. <span class="citation"
+data-cites="parasram">[@parasram]</span>.</p>
+<h1 id="выполнение-лабораторной-работы">Выполнение лабораторной
+работы</h1>
+<p>Запускаю локальный сервер, на котором открою веб-приложение DVWA для
+тестирования инструмента Burp Suite (рис. <span class="citation"
+data-cites="fig:001">[-@fig:001]</span>).</p>
+<figure id="fig:001">
+<img src="image/1.png" style="width:70.0%"
+alt="Запуск локального сервера" />
+<figcaption aria-hidden="true">Запуск локального сервера</figcaption>
+</figure>
+<p>Запускаю инструмент Burp Suite (рис. <span class="citation"
+data-cites="fig:002">[-@fig:002]</span>).</p>
+<figure id="fig:002">
+<img src="image/2.png" style="width:70.0%" alt="Запуск приложения" />
+<figcaption aria-hidden="true">Запуск приложения</figcaption>
+</figure>
+<p>Открываю сетевые настройки браузера, для подготовке к работе (рис.
+<span class="citation" data-cites="fig:003">[-@fig:003]</span>).</p>
+<figure id="fig:003">
+<img src="image/3.PNG" style="width:70.0%"
+alt="Сетевые настройки браузера" />
+<figcaption aria-hidden="true">Сетевые настройки браузера</figcaption>
+</figure>
+<p>Изменение настроек сервера для работы с proxy и захватом данных с
+помощью Burp Suite (рис. <span class="citation"
+data-cites="fig:004">[-@fig:004]</span>).</p>
+<figure id="fig:004">
+<img src="image/4.PNG" style="width:70.0%" alt="Настройки сервера" />
+<figcaption aria-hidden="true">Настройки сервера</figcaption>
+</figure>
+<p>Изменяю настройки Proxy инструмента Burp Suite для дальнейшей работы
+(рис. <span class="citation"
+data-cites="fig:005">[-@fig:005]</span>).</p>
+<figure id="fig:005">
+<img src="image/5.PNG" style="width:70.0%" alt="Настройки Burp Suite" />
+<figcaption aria-hidden="true">Настройки Burp Suite</figcaption>
+</figure>
+<p>Во вкладке Proxy устанавливаю “Intercept is on” (рис. <span
+class="citation" data-cites="fig:006">[-@fig:006]</span>).</p>
+<figure id="fig:006">
+<img src="image/6.PNG" style="width:70.0%" alt="Настройки Proxy" />
+<figcaption aria-hidden="true">Настройки Proxy</figcaption>
+</figure>
+<p>Чтобы Burp Suite исправно работал с локальным сервером, наобходимо
+установить параметр <code>network_allow_hijacking_loacalhost</code> на
+<code>true</code> (рис. <span class="citation"
+data-cites="fig:007">[-@fig:007]</span>).</p>
+<figure id="fig:007">
+<img src="image/7.PNG" style="width:70.0%" alt="Настройки параметров" />
+<figcaption aria-hidden="true">Настройки параметров</figcaption>
+</figure>
+<p>Пытаюсь зайти в браузере на DVWA, тут же во вкладки Proxy появляется
+захваченный запрос. Нажимаем “Forward”, чтобы загрузить страницу (рис.
+<span class="citation" data-cites="fig:008">[-@fig:008]</span>).</p>
+<figure id="fig:008">
+<img src="image/8.PNG" style="width:70.0%"
+alt="Получаемые запросы сервера" />
+<figcaption aria-hidden="true">Получаемые запросы сервера</figcaption>
+</figure>
+<p>Загрузилась страница авторизации, текст запроса поменялся (рис. <span
+class="citation" data-cites="fig:009">[-@fig:009]</span>).</p>
+<figure id="fig:009">
+<img src="image/9.PNG" style="width:70.0%" alt="Страница авторизации" />
+<figcaption aria-hidden="true">Страница авторизации</figcaption>
+</figure>
+<p>История запросов хранится во вкладке Target (рис. <span
+class="citation" data-cites="fig:010">[-@fig:010]</span>).</p>
+<figure id="fig:010">
+<img src="image/10.PNG" style="width:70.0%" alt="История запросов" />
+<figcaption aria-hidden="true">История запросов</figcaption>
+</figure>
+<p>Попробуем ввести неправильные, случайные данные в веб-приложении и
+нажмем <code>Login</code>. В запросе увидим строку, в которой
+отображаются введенные нами данные, то есть поле для ввода (рис. <span
+class="citation" data-cites="fig:011">[-@fig:011]</span>).</p>
+<figure id="fig:011">
+<img src="image/11.PNG" style="width:70.0%"
+alt="Ввод случайных данных" />
+<figcaption aria-hidden="true">Ввод случайных данных</figcaption>
+</figure>
+<p>Этот запрос так же можно найти во вкладке Target, там же жмем правой
+кнопкой мыши на хост нужного запроса, и далее нажимаем “Send to
+Intruder” (рис. <span class="citation"
+data-cites="fig:012">[-@fig:012]</span>).</p>
+<figure id="fig:012">
+<img src="image/12.PNG" style="width:70.0%"
+alt="POST-запрос с вводом пароля и логина" />
+<figcaption aria-hidden="true">POST-запрос с вводом пароля и
+логина</figcaption>
+</figure>
+<p>Попадаем на вкладку Intruder, видим значения по умолчанию у типа
+атаки и наш запрос (рис. <span class="citation"
+data-cites="fig:013">[-@fig:013]</span>).</p>
+<figure id="fig:013">
+<img src="image/13.PNG" style="width:70.0%" alt="Вкладка Intruder" />
+<figcaption aria-hidden="true">Вкладка Intruder</figcaption>
+</figure>
+<p>Изменяем значение типа атаки на Cluster bomb и проставляем
+специальные символы у тех данных в форме для ввода, которые будем
+пробивать, то есть у имени пользователя и пароля (рис. <span
+class="citation" data-cites="fig:014">[-@fig:014]</span>).</p>
+<figure id="fig:014">
+<img src="image/14.PNG" style="width:70.0%"
+alt="Изменение типа атаки" />
+<figcaption aria-hidden="true">Изменение типа атаки</figcaption>
+</figure>
+<p>Так как мы отметили два параметра для подбора, то нам нужно два
+списка со значениями для подбора. Заполняем первый список в
+<code>Payload setting</code> (рис. <span class="citation"
+data-cites="fig:015">[-@fig:015]</span>).</p>
+<figure id="fig:015">
+<img src="image/15.PNG" style="width:70.0%" alt="Первый Simple list" />
+<figcaption aria-hidden="true">Первый Simple list</figcaption>
+</figure>
+<p>Переключаемся на второй список и добавляем значения в него. В строке
+request count видим нужное количество запросов, чтобы проверить все
+возможные пары пользователь-пароль (рис. <span class="citation"
+data-cites="fig:016">[-@fig:016]</span>).</p>
+<figure id="fig:016">
+<img src="image/16.PNG" style="width:70.0%" alt="Второй Simple list" />
+<figcaption aria-hidden="true">Второй Simple list</figcaption>
+</figure>
+<p>Запускаю атаку и начинаю подбор (рис. <span class="citation"
+data-cites="fig:017">[-@fig:017]</span>).</p>
+<figure id="fig:017">
+<img src="image/17.PNG" style="width:70.0%" alt="Запуск атаки" />
+<figcaption aria-hidden="true">Запуск атаки</figcaption>
+</figure>
+<p>При открытии результата каждого post-запроса можно увидеть полученный
+get-запрос, в нем видно, куда нас перенаправило после выполнения ввода
+пары пользователь-пароль. В представленном случае с подбором пары
+admin-admin нас перенаправило на login.php, это значит, что пара не
+подходит (рис. <span class="citation"
+data-cites="fig:018">[-@fig:018]</span>).</p>
+<figure id="fig:018">
+<img src="image/18.PNG" style="width:70.0%" alt="Результат запроса" />
+<figcaption aria-hidden="true">Результат запроса</figcaption>
+</figure>
+<p>Проверим результат пары admin-password во вкладке Response, теперь
+нас перенаправляет на страницу index.php, значит пара должна быть верной
+(рис. <span class="citation"
+data-cites="fig:019">[-@fig:019]</span>).</p>
+<figure id="fig:019">
+<img src="image/19.PNG" style="width:70.0%" alt="Результат запроса" />
+<figcaption aria-hidden="true">Результат запроса</figcaption>
+</figure>
+<p>Дополнительная проверка с использованием Repeater, нажимаем на нужный
+нам запрос правой кнопкой мыши и жмем “Send to Repeater” (рис. <span
+class="citation" data-cites="fig:020">[-@fig:020]</span>).</p>
+<figure id="fig:020">
+<img src="image/20.PNG" style="width:70.0%"
+alt="Дополнительная проверка результата" />
+<figcaption aria-hidden="true">Дополнительная проверка
+результата</figcaption>
+</figure>
+<p>Переходим во вкладку “Repeater” (рис. <span class="citation"
+data-cites="fig:021">[-@fig:021]</span>).</p>
+<figure id="fig:021">
+<img src="image/21.PNG" style="width:70.0%" alt="Вкладка Repeater" />
+<figcaption aria-hidden="true">Вкладка Repeater</figcaption>
+</figure>
+<p>Нажимаем “send”, получаем в Response в результат перенаправление на
+index.php (рис. <span class="citation"
+data-cites="fig:022">[-@fig:022]</span>).</p>
+<figure id="fig:022">
+<img src="image/22.PNG" style="width:70.0%" alt="Окно Response" />
+<figcaption aria-hidden="true">Окно Response</figcaption>
+</figure>
+<p>После нажатия на <code>Follow redirection</code>, получим
+нескомпилированный html код в окне Response (рис. <span class="citation"
+data-cites="fig:023">[-@fig:023]</span>).</p>
+<figure id="fig:023">
+<img src="image/23.PNG" style="width:70.0%"
+alt="Изменение в окне Response" />
+<figcaption aria-hidden="true">Изменение в окне Response</figcaption>
+</figure>
+<p>Далее в подокне Render получим то, как выглядит полученная страница
+(рис. <span class="citation"
+data-cites="fig:024">[-@fig:024]</span>).</p>
+<figure id="fig:024">
+<img src="image/24.PNG" style="width:70.0%" alt="Полученная страница" />
+<figcaption aria-hidden="true">Полученная страница</figcaption>
+</figure>
+<h1 id="выводы">Выводы</h1>
+<p>При выполнении лабораторной работы научилась использовать инструмент
+Burp Suite.</p>
