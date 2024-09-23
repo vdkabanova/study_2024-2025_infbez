@@ -1,0 +1,207 @@
+<h1 id="цель-работы">Цель работы</h1>
+<p>Изучение механизмов изменения идентификаторов, применения SetUID- и
+Sticky-битов. Получение практических навыков работы в кон- соли с
+дополнительными атрибутами. Рассмотрение работы механизма смены
+идентификатора процессов пользователей, а также влияние бита Sticky на
+запись и удаление файлов.</p>
+<h1 id="выполнение-лабораторной-работы">Выполнение лабораторной
+работы</h1>
+<p>Для лабораторной работы необходимо проверить, установлен ли
+компилятор gcc, комнда <code>gcc -v</code> позволяет это сделать. Также
+осуществляется отключение системы запретом с помощью
+<code>setenforce 0</code> (рис. 1).</p>
+<figure id="fig:001">
+<img src="image/1.png" style="width:70.0%"
+alt="Подготовка к лабораторной работе" />
+<figcaption aria-hidden="true">Подготовка к лабораторной
+работе</figcaption>
+</figure>
+<p>Осуществляется вход от имени пользователя guest (рис. 2).</p>
+<figure id="fig:002">
+<img src="image/2.png" style="width:70.0%"
+alt="Вход от имени пользователя guest" />
+<figcaption aria-hidden="true">Вход от имени пользователя
+guest</figcaption>
+</figure>
+<p>Создание файла simpled.c и запись в файл кода (рис. 3)</p>
+<figure id="fig:003">
+<img src="image/3.png" style="width:70.0%" alt="Создание файла" />
+<figcaption aria-hidden="true">Создание файла</figcaption>
+</figure>
+<p><code>C++ Листинг 1 #include &lt;sys/types.h&gt; #include &lt;unistd.h&gt; #include &lt;stdio.h&gt; int main () { uid_t uid = geteuid (); gid_t gid = getegid (); printf ("uid=%d, gid=%d\n", uid, gid); return 0; }</code></p>
+<p>Cодержимое файла выглядит следующти образом (рис. 4)</p>
+<figure id="fig:004">
+<img src="image/4.png" style="width:70.0%" alt="Содержимое файла" />
+<figcaption aria-hidden="true">Содержимое файла</figcaption>
+</figure>
+<p>Компилирую файл, проверяю, что он скомпилировался (рис. 5)</p>
+<figure id="fig:005">
+<img src="image/5.png" style="width:70.0%" alt="Компиляция файла" />
+<figcaption aria-hidden="true">Компиляция файла</figcaption>
+</figure>
+<p>Запускаю исполняемый файл. В выводе файла выписыны номера пользоватея
+и групп, от вывода при вводе if, они отличаются только тем, что
+информации меньше (рис. 6)</p>
+<figure id="fig:006">
+<img src="image/6.png" style="width:70.0%" alt="Сравнение команд" />
+<figcaption aria-hidden="true">Сравнение команд</figcaption>
+</figure>
+<p>Создание, запись в файл и компиляция файла simpled2.c. Запуск
+программы (рис. 7)</p>
+<figure id="fig:007">
+<img src="image/7.png" style="width:70.0%"
+alt="Создание и компиляция файла" />
+<figcaption aria-hidden="true">Создание и компиляция файла</figcaption>
+</figure>
+<p><code>C++ Листинг 2 #include &lt;sys/types.h&gt; #include &lt;unistd.h&gt; #include &lt;stdio.h&gt; int main () { uid_t real_uid = getuid (); uid_t e_uid = geteuid (); gid_t real_gid = getgid (); gid_t e_gid = getegid () ; printf ("e_uid=%d, e_gid=%d\n", e_uid, e_gid); printf ("real_uid=%d, real_gid=%d\n", real_uid, real_gid); return 0; }</code></p>
+<p>(рис. 8)</p>
+<figure id="fig:008">
+<img src="image/8.png" style="width:70.0%" alt="Содержимое файла" />
+<figcaption aria-hidden="true">Содержимое файла</figcaption>
+</figure>
+<p>С помощью chown изменяю владельца файла на суперпользователя, с
+помощью chmod изменяю права доступа (рис. 9)</p>
+<figure id="fig:009">
+<img src="image/9.png" style="width:70.0%"
+alt="Смена владельца файла и прав доступа к файлу" />
+<figcaption aria-hidden="true">Смена владельца файла и прав доступа к
+файлу</figcaption>
+</figure>
+<p>Сравнение вывода программы и команды id, наша команда снова вывела
+только ограниченное количество информации(рис. 10)</p>
+<figure id="fig:010">
+<img src="image/10.png" style="width:70.0%" alt="Запуск файла" />
+<figcaption aria-hidden="true">Запуск файла</figcaption>
+</figure>
+<p>Создание и компиляция файла readfile.c (рис. 11)</p>
+<figure id="fig:011">
+<img src="image/11.png" style="width:70.0%"
+alt="Создание и компиляция файла" />
+<figcaption aria-hidden="true">Создание и компиляция файла</figcaption>
+</figure>
+<p><code>C++ Листинг 3 #include &lt;fcntl.h&gt; #include &lt;stdio.h&gt; #include &lt;sys/stat.h&gt; #include &lt;sys/types.h&gt; #include &lt;unistd.h&gt; int main (int argc, char* argv[]) { unsigned char buffer[16]; size_t bytes_read; int i; int fd = open (argv[1], O_RDONLY); do { bytes_read = read (fd, buffer, sizeof (buffer)); for (i =0; i &lt; bytes_read; ++i) printf("%c", buffer[i]); } while (bytes_read == sizeof (buffer)); close (fd); return 0; }</code></p>
+<p>(рис. 12)</p>
+<figure id="fig:012">
+<img src="image/12.png" style="width:70.0%" alt="Содержимое файла" />
+<figcaption aria-hidden="true">Содержимое файла</figcaption>
+</figure>
+<p>Снова от имени суперпользователи меняю владельца файла readfile.
+Далее меняю права доступа так, чтобы пользователь guest не смог прочесть
+содержимое файла (рис. 13)</p>
+<figure id="fig:013">
+<img src="image/13.png" style="width:70.0%"
+alt="Смена владельца файла и прав доступа к файлу" />
+<figcaption aria-hidden="true">Смена владельца файла и прав доступа к
+файлу</figcaption>
+</figure>
+<p>Проверка прочесть файл от имени пользователя guest.Прочесть файл не
+удается (рис. 14)</p>
+<figure id="fig:014">
+<img src="image/14.png" style="width:70.0%"
+alt="Попытка прочесть содержимое файла" />
+<figcaption aria-hidden="true">Попытка прочесть содержимое
+файла</figcaption>
+</figure>
+<p>Попытка прочесть тот же файл с помощью программы readfile, в ответ
+получаем “отказано в доступе” (рис. 15)</p>
+<figure id="fig:015">
+<img src="image/15.png" style="width:70.0%"
+alt="Попытка прочесть содержимое файла программой" />
+<figcaption aria-hidden="true">Попытка прочесть содержимое файла
+программой</figcaption>
+</figure>
+<p>Попытка прочесть файл <code>\etc\shadow</code> с помощью программы,
+все еще получаем отказ в доступе (рис. 16)</p>
+<figure id="fig:016">
+<img src="image/16.png" style="width:70.0%"
+alt="Попытка прочесть содержимое файла программой" />
+<figcaption aria-hidden="true">Попытка прочесть содержимое файла
+программой</figcaption>
+</figure>
+<p>Пробуем прочесть эти же файлы от имени суперпользователя и чтение
+файлов проходит успешно (рис. 17)</p>
+<figure id="fig:017">
+<img src="image/17.png" style="width:70.0%"
+alt="Чтение файла от имени суперпользователя" />
+<figcaption aria-hidden="true">Чтение файла от имени
+суперпользователя</figcaption>
+</figure>
+<p>Проверяем папку tmp на наличие атрибута Sticky, т.к. в выводе есть
+буква t, то атрибут установлен (рис. 18)</p>
+<figure id="fig:018">
+<img src="image/18.png" style="width:70.0%"
+alt="Проверка атрибутов директории tmp" />
+<figcaption aria-hidden="true">Проверка атрибутов директории
+tmp</figcaption>
+</figure>
+<p>От имени пользователя guest создаю файл с текстом, добавляю права на
+чтение и запись для других пользователей (рис. 19)</p>
+<figure id="fig:019">
+<img src="image/19.png" style="width:70.0%"
+alt="Создание файла, изменение прав доступа" />
+<figcaption aria-hidden="true">Создание файла, изменение прав
+доступа</figcaption>
+</figure>
+<p>Вхожу в систему от имени пользователя guest2, от его имени могу
+прочитать файл file01.txt, но перезаписать информацию в нем не могу
+(рис. 20)</p>
+<figure id="fig:020">
+<img src="image/20.png" style="width:70.0%"
+alt="Попытка чтения файла" />
+<figcaption aria-hidden="true">Попытка чтения файла</figcaption>
+</figure>
+<p>Также невозможно добавить в файл file01.txt новую информацию от имени
+пользователя guest2 (рис. 21)</p>
+<figure id="fig:021">
+<img src="image/21.png" style="width:70.0%"
+alt="Попытка записи в файл" />
+<figcaption aria-hidden="true">Попытка записи в файл</figcaption>
+</figure>
+<p>Далее пробуем удалить файл, снова получаем отказ (рис. 22)</p>
+<figure id="fig:022">
+<img src="image/22.png" style="width:70.0%"
+alt="Попытка удалить файл" />
+<figcaption aria-hidden="true">Попытка удалить файл</figcaption>
+</figure>
+<p>От имени суперпользователя снимаем с директории атрибут Sticky (рис.
+23)</p>
+<figure id="fig:023">
+<img src="image/23.png" style="width:70.0%"
+alt="Смена атрибутов файла" />
+<figcaption aria-hidden="true">Смена атрибутов файла</figcaption>
+</figure>
+<p>Проверяем, что атрибут действительно снят (рис. 24)</p>
+<figure id="fig:024">
+<img src="image/24.png" style="width:70.0%"
+alt="Проверка атрибутов директории" />
+<figcaption aria-hidden="true">Проверка атрибутов
+директории</figcaption>
+</figure>
+<p>Далее был выполнен повтор предыдущих действий. По результатам без
+Sticky-бита запись в файл и дозапись в файл осталась невозможной, зато
+удаление файла прошло успешно (рис. 25)</p>
+<figure id="fig:025">
+<img src="image/25.png" style="width:70.0%"
+alt="Повтор предыдущих действий" />
+<figcaption aria-hidden="true">Повтор предыдущих действий</figcaption>
+</figure>
+<p>Возвращение директории tmp атрибута t от имени суперпользователя
+(рис. 26)</p>
+<figure id="fig:026">
+<img src="image/26.png" style="width:70.0%" alt="Изменение атрибутов" />
+<figcaption aria-hidden="true">Изменение атрибутов</figcaption>
+</figure>
+<h1 id="выводы">Выводы</h1>
+<p>Изучила механизм изменения идентификаторов, применила SetUID- и
+Sticky-биты. Получила практические навыки работы в кон- соли с
+дополнительными атрибутами. Рассмотрела работы механизма смены
+идентификатора процессов пользователей, а также влияние бита Sticky на
+запись и удаление файлов.</p>
+<h1 id="список-литературы.-библиография">Список литературы.
+Библиография</h1>
+<p>[0] Методические материалы курса</p>
+<p>[1] Права доступа:
+https://codechick.io/tutorials/unix-linux/unix-linux-permissions</p>
+<p>[2] Расширенные атрибуты: https://ru.manpages.org/xattr/7</p>
+<p>[3] Операции с расширенными атрибутами:
+https://p-n-z-8-8.livejournal.com/64493.html</p>
