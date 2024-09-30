@@ -1,0 +1,279 @@
+<h1 id="выполнение-лабораторной-работы">Выполнение лабораторной
+работы</h1>
+<p>Вошла в систему под своей учетной записью. Убедилась, что SELinux
+работает в режиме enforcing политики targeted с помощью команд
+getenforce и sestatus (рис. <span class="citation"
+data-cites="fig:001">[-@fig:001]</span>).</p>
+<figure id="fig:001">
+<img src="image/1.jpg" style="width:70.0%"
+alt="проверка режима работы SELinux" />
+<figcaption aria-hidden="true">проверка режима работы
+SELinux</figcaption>
+</figure>
+<p>Запускаю сервер apache, далее обращаюсь с помощью браузера к
+веб-серверу, запущенному на компьютере, он работает, что видно из вывода
+команды <code>service httpd status</code> (рис. 2-5).</p>
+<figure id="fig:002">
+<img src="image/2.jpg" style="width:70.0%"
+alt="Проверка работы Apache" />
+<figcaption aria-hidden="true">Проверка работы Apache</figcaption>
+</figure>
+<figure id="fig:003">
+<img src="image/3.jpg" style="width:70.0%"
+alt="Проверка работы Apache" />
+<figcaption aria-hidden="true">Проверка работы Apache</figcaption>
+</figure>
+<figure id="fig:004">
+<img src="image/4.jpg" style="width:70.0%"
+alt="Проверка работы Apache" />
+<figcaption aria-hidden="true">Проверка работы Apache</figcaption>
+</figure>
+<figure id="fig:005">
+<img src="image/5.jpg" style="width:70.0%"
+alt="Проверка работы Apache" />
+<figcaption aria-hidden="true">Проверка работы Apache</figcaption>
+</figure>
+<p>С помощью команды <code>ps auxZ | grep httpd</code> нашла веб-сервер
+Apache в списке процессов. Его контекст безопасности - httpd_t (рис.6-7
+).</p>
+<figure id="fig:006">
+<img src="image/6.jpg" style="width:70.0%"
+alt="Контекст безопасности Apache" />
+<figcaption aria-hidden="true">Контекст безопасности Apache</figcaption>
+</figure>
+<figure id="fig:007">
+<img src="image/7.jpg" style="width:70.0%"
+alt="Контекст безопасности Apache" />
+<figcaption aria-hidden="true">Контекст безопасности Apache</figcaption>
+</figure>
+<p>Просмотрела текущее состояние переключателей SELinux для Apache с
+помощью команды <code>sestatus -bigrep httpd</code> (рис. 8-9).</p>
+<figure id="fig:004">
+<img src="image/8.jpg" style="width:70.0%"
+alt="Состояние переключателей SELinux" />
+<figcaption aria-hidden="true">Состояние переключателей
+SELinux</figcaption>
+</figure>
+<figure id="fig:004">
+<img src="image/9.jpg" style="width:70.0%"
+alt="Состояние переключателей SELinux" />
+<figcaption aria-hidden="true">Состояние переключателей
+SELinux</figcaption>
+</figure>
+<p>Просмотрела статистику по политике с помощью команды
+<code>seinfo</code>. Множество пользователей - 8, ролей - 39, типов -
+5135. (рис. 10).</p>
+<figure id="fig:010">
+<img src="image/10.jpg" style="width:70.0%"
+alt="Cтатистика по политике" />
+<figcaption aria-hidden="true">Cтатистика по политике</figcaption>
+</figure>
+<p>Типы поддиректорий, находящихся в директории <code>/var/www</code>, с
+помощью команды <code>ls -lZ /var/www</code> следующие: владелец - root,
+права на изменения только у владельца. Файлов в директории нет
+(рис.11-12).</p>
+<figure id="fig:011">
+<img src="image/11.jpg" style="width:70.0%" alt="Типы поддиректорий" />
+<figcaption aria-hidden="true">Типы поддиректорий</figcaption>
+</figure>
+<figure id="fig:012">
+<img src="image/12.jpg" style="width:70.0%" alt="Типы поддиректорий" />
+<figcaption aria-hidden="true">Типы поддиректорий</figcaption>
+</figure>
+<p>В директории <code>/var/www/html</code> нет файлов. (рис. 13).</p>
+<figure id="fig:013">
+<img src="image/13.jpg" style="width:70.0%" alt="Типы файлов" />
+<figcaption aria-hidden="true">Типы файлов</figcaption>
+</figure>
+<p>Создать файл может только суперпользователь, поэтому от его имени
+создаем файл touch.html cо следующим содержанием:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="dt">&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span>test<span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div>
+<p>(рис. 14-15).</p>
+<figure id="fig:014">
+<img src="image/14.jpg" style="width:70.0%" alt="Создание файла" />
+<figcaption aria-hidden="true">Создание файла</figcaption>
+</figure>
+<figure id="fig:015">
+<img src="image/15.jpg" style="width:70.0%" alt="Создание файла" />
+<figcaption aria-hidden="true">Создание файла</figcaption>
+</figure>
+<p>Проверяю контекст созданного файла. По умолчанию это
+httpd_sys_content_t (рис. 16-17).</p>
+<figure id="fig:016">
+<img src="image/16.jpg" style="width:70.0%" alt="Контекст файла" />
+<figcaption aria-hidden="true">Контекст файла</figcaption>
+</figure>
+<figure id="fig:017">
+<img src="image/17.jpg" style="width:70.0%" alt="Контекст файла" />
+<figcaption aria-hidden="true">Контекст файла</figcaption>
+</figure>
+<p>Обращаюсь к файлу через веб-сервер, введя в браузере адрес
+http://127.0.0.1/test.html. Файл был успешно отображён (рис. 18).</p>
+<figure id="fig:018">
+<img src="image/18.jpg" style="width:70.0%" alt="Отображение файла" />
+<figcaption aria-hidden="true">Отображение файла</figcaption>
+</figure>
+<p>Изучила справку man httpd_selinux. Рассмотрим полученный контекст
+детально. Так как по умолчанию пользователи CentOS являются свободными
+от типа (unconfined в переводе с англ. означает свободный), созданному
+нами файлу test.html был сопоставлен SELinux, пользователь unconfined_u.
+Это первая часть контекста. Далее политика ролевого разделения доступа
+RBAC используется процессами, но не файлами, поэтому роли не имеют
+никакого значения для файлов. Роль object_r используется по умолчанию
+для файлов на «постоянных» носителях и на сетевых файловых системах. (В
+директории /ргос файлы, относящиеся к процессам, могут иметь роль
+system_r. Если активна политика MLS, то могут использоваться и другие
+роли, например, secadm_r. Данный случай мы рассматривать не будем, как и
+предназначение :s0). Тип httpd_sys_content_t позволяет процессу httpd
+получить доступ к файлу. Благодаря наличию последнего типа мы получили
+доступ к файлу при обращении к нему через браузер. (рис. 19).</p>
+<figure id="fig:019">
+<img src="image/19.jpg" style="width:70.0%"
+alt="Изучение справки по команде" />
+<figcaption aria-hidden="true">Изучение справки по команде</figcaption>
+</figure>
+<p>Изменяю контекст файла <code>/var/www/html/test.html</code> с
+<code>httpd_sys_content_t</code> на любой другой, к которому процесс
+httpd не должен иметь доступа, например, <code>на samba_share_t</code>:
+<code>chcon -t samba_share_t /var/www/html/test.html</code>
+<code>ls -Z /var/www/html/test.html</code> Контекст действительно
+поменялся (рис. 20-21).</p>
+<figure id="fig:020">
+<img src="image/20.jpg" style="width:70.0%" alt="Изменение контекста" />
+<figcaption aria-hidden="true">Изменение контекста</figcaption>
+</figure>
+<figure id="fig:021">
+<img src="image/21.jpg" style="width:70.0%" alt="Изменение контекста" />
+<figcaption aria-hidden="true">Изменение контекста</figcaption>
+</figure>
+<p>При попытке отображения файла в браузере получаем сообщение об ошибке
+(рис. 22).</p>
+<figure id="fig:022">
+<img src="image/22.jpg" style="width:70.0%" alt="Отображение файла" />
+<figcaption aria-hidden="true">Отображение файла</figcaption>
+</figure>
+<p>файл не был отображён, хотя права доступа позволяют читать этот файл
+любому пользователю, потому что установлен контекст, к которому процесс
+httpd не должен иметь доступа.</p>
+<p>Просматриваю log-файлы веб-сервера Apache и системный лог-файл:
+<code>tail /var/log/messages</code>. Если в системе окажутся запущенными
+процессы setroubleshootd и audtd, то вы также сможете увидеть ошибки,
+аналогичные указанным выше, в файле /var/log/audit/audit.log. (рис.
+23-26).</p>
+<figure id="fig:023">
+<img src="image/23.jpg" style="width:70.0%"
+alt="Попытка прочесть лог-файл" />
+<figcaption aria-hidden="true">Попытка прочесть лог-файл</figcaption>
+</figure>
+<figure id="fig:023">
+<img src="image/24.jpg" style="width:70.0%"
+alt="Попытка прочесть лог-файл" />
+<figcaption aria-hidden="true">Попытка прочесть лог-файл</figcaption>
+</figure>
+<figure id="fig:023">
+<img src="image/25.jpg" style="width:70.0%"
+alt="Попытка прочесть лог-файл" />
+<figcaption aria-hidden="true">Попытка прочесть лог-файл</figcaption>
+</figure>
+<figure id="fig:023">
+<img src="image/26.jpg" style="width:70.0%"
+alt="Попытка прочесть лог-файл" />
+<figcaption aria-hidden="true">Попытка прочесть лог-файл</figcaption>
+</figure>
+<p>Чтобы запустить веб-сервер Apache на прослушивание ТСР-порта 81 (а не
+80, как рекомендует IANA и прописано в /etc/services) открываю файл
+/etc/httpd/httpd.conf для изменения. (рис. 27).</p>
+<figure id="fig:027">
+<img src="image/27.jpg" style="width:70.0%" alt="Изменение файла" />
+<figcaption aria-hidden="true">Изменение файла</figcaption>
+</figure>
+<p>Нахожу строчку Listen 80 и заменяю её на Listen 81. (рис. 28).</p>
+<figure id="fig:028">
+<img src="image/28.jpg" style="width:70.0%" alt="Изменение порта" />
+<figcaption aria-hidden="true">Изменение порта</figcaption>
+</figure>
+<p>Выполняю перезапуск веб-сервера Apache. Произошёл сбой, потому что
+порт 80 для локальной сети, а 81 нет (рис. 29).</p>
+<figure id="fig:029">
+<img src="image/29.jpg" style="width:70.0%"
+alt="Попытка прослушивания другого порта" />
+<figcaption aria-hidden="true">Попытка прослушивания другого
+порта</figcaption>
+</figure>
+<p>Проанализируйте лог-файлы: <code>tail -nl /var/log/messages</code>
+(рис. 30).</p>
+<figure id="fig:030">
+<img src="image/30.jpg" style="width:70.0%" alt="Проверка лог-файлов" />
+<figcaption aria-hidden="true">Проверка лог-файлов</figcaption>
+</figure>
+<p>Просмотрите файлы <code>/var/log/http/error_log</code>,
+<code>/var/log/http/access_log</code> и
+<code>/var/log/audit/audit.log</code> и выясните, в каких файлах
+появились записи. Запись появилась в файлу error_log (рис. 31-32).</p>
+<figure id="fig:031">
+<img src="image/31.jpg" style="width:70.0%" alt="Проверка лог-файлов" />
+<figcaption aria-hidden="true">Проверка лог-файлов</figcaption>
+</figure>
+<figure id="fig:032">
+<img src="image/32.jpg" style="width:70.0%" alt="Проверка лог-файлов" />
+<figcaption aria-hidden="true">Проверка лог-файлов</figcaption>
+</figure>
+<p>Выполняю команду
+<code>semanage port -a -t http_port_t -р tcp 81</code> После этого
+проверяю список портов командой
+<code>semanage port -l | grep http_port_t</code> Порт 81 появился в
+списке (рис. 33-34).</p>
+<figure id="fig:033">
+<img src="image/33.jpg" style="width:70.0%" alt="Проверка портов" />
+<figcaption aria-hidden="true">Проверка портов</figcaption>
+</figure>
+<figure id="fig:033">
+<img src="image/34.jpg" style="width:70.0%" alt="Проверка портов" />
+<figcaption aria-hidden="true">Проверка портов</figcaption>
+</figure>
+<p>Перезапускаю сервер Apache (рис. 35).</p>
+<figure id="fig:035">
+<img src="image/35.jpg" style="width:70.0%" alt="Перезапуск сервера" />
+<figcaption aria-hidden="true">Перезапуск сервера</figcaption>
+</figure>
+<p>Теперь он работает, ведь мы внесли порт 81 в список портов
+<code>htttpd_port_t</code> (рис. 36).</p>
+<figure id="fig:036">
+<img src="image/36.jpg" style="width:70.0%" alt="Проверка сервера" />
+<figcaption aria-hidden="true">Проверка сервера</figcaption>
+</figure>
+<p>Возвращаю в файле /etc/httpd/httpd.conf порт 80, вместо 81. Проверяю,
+что порт 81 удален, это правда. (рис. 37-40).</p>
+<figure id="fig:037">
+<img src="image/37.jpg" style="width:70.0%" alt="Проверка порта 81" />
+<figcaption aria-hidden="true">Проверка порта 81</figcaption>
+</figure>
+<figure id="fig:038">
+<img src="image/38.jpg" style="width:70.0%" alt="Проверка порта 81" />
+<figcaption aria-hidden="true">Проверка порта 81</figcaption>
+</figure>
+<figure id="fig:039">
+<img src="image/39.jpg" style="width:70.0%" alt="Проверка порта 81" />
+<figcaption aria-hidden="true">Проверка порта 81</figcaption>
+</figure>
+<figure id="fig:040">
+<img src="image/40.jpg" style="width:70.0%" alt="Проверка порта 81" />
+<figcaption aria-hidden="true">Проверка порта 81</figcaption>
+</figure>
+<p>Далее удаляю файл test.html, проверяю, что он удален(рис. 41-42).</p>
+<figure id="fig:041">
+<img src="image/41.jpg" style="width:70.0%" alt="Удаление файла" />
+<figcaption aria-hidden="true">Удаление файла</figcaption>
+</figure>
+<figure id="fig:042">
+<img src="image/42.jpg" style="width:70.0%" alt="Удаление файла" />
+<figcaption aria-hidden="true">Удаление файла</figcaption>
+</figure>
+<h1 id="выводы">Выводы</h1>
+<p>В ходе выполнения данной лабораторной работы были развиты навыки
+администрирования ОС Linux, получено первое практическое знакомство с
+технологией SELinux и проверена работа SELinux на практике совместно с
+веб-сервером Apache.</p>
